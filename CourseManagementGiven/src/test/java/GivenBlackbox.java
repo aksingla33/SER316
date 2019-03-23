@@ -84,6 +84,49 @@ public class GivenBlackbox {
         System.out.println(ans);
         assertTrue(ans.equals(twoStudentExpected));
     }
+    
+    @Test
+    public void  oneGradeEach() throws Exception {
+         Course sixStudent = createCourse("SER317");
+         sixStudent.set_points("Hanna",100);
+         sixStudent.set_points("Karla",80);
+         sixStudent.set_points("Becca",60);
+         sixStudent.set_points("Monte",40);
+         sixStudent.set_points("Sheldon", 20);
+
+     // this would be the expected result after the method countOccurencesLetterGrades is called
+         HashMap<String, Integer> sixStudentExpected = new HashMap<String, Integer>(); 
+         sixStudentExpected.put("A", 1);
+         sixStudentExpected.put("B", 1);
+         sixStudentExpected.put("C", 1);
+         sixStudentExpected.put("D", 1);
+         sixStudentExpected.put("F", 1);
+         
+         HashMap<String, Integer> ans = sixStudent.countOccurencesLetterGrades();
+         System.out.println(ans);
+         assertTrue(ans.equals(sixStudentExpected));
+         
+	 	 sixStudent.set_points("Rob", -10);
+	 	 
+         ans = sixStudent.countOccurencesLetterGrades();
+         System.out.println(ans);
+         assertTrue(ans.equals(sixStudentExpected));
+    }
+    
+    @Test
+    public void  noStudent() throws Exception {
+         Course noStudent = createCourse("SER317");
+         // this would be the expected result after the method countOccurencesLetterGrades is called
+         
+         boolean exception = false;
+         try {
+        	 	exception = false;
+        	 	HashMap<String, Integer> ans = noStudent.countOccurencesLetterGrades();
+         } catch(NullPointerException e) {
+        	 	exception = true;
+         }
+         assertTrue(exception);
+    }
 
 
 }
