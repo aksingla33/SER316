@@ -86,27 +86,45 @@ public class GivenBlackbox {
     }
     
     @Test
-    public void  oneGradeEach() throws Exception {
-         Course sixStudent = createCourse("SER317");
-         sixStudent.set_points("Hanna",100);
-         sixStudent.set_points("Karla",80);
-         sixStudent.set_points("Becca",60);
-         sixStudent.set_points("Monte",40);
-         sixStudent.set_points("Sheldon", 20);
+    public void oneStudent() throws Exception{
+	Course oneStudent = createCourse("SER317");
+	oneStudent.set_points("Hanna",100);
 
-     // this would be the expected result after the method countOccurencesLetterGrades is called
-         HashMap<String, Integer> sixStudentExpected = new HashMap<String, Integer>(); 
-         sixStudentExpected.put("A", 1);
-         sixStudentExpected.put("B", 1);
-         sixStudentExpected.put("C", 1);
-         sixStudentExpected.put("D", 1);
-         sixStudentExpected.put("F", 1);
+    // this would be the expected result after the method countOccurencesLetterGrades is called
+	HashMap<String, Integer> oneStudentExpected = new HashMap<String, Integer>(); 
+	oneStudentExpected.put("A", 1);
+    	oneStudentExpected.put("B", 0);
+	oneStudentExpected.put("C", 0);
+	oneStudentExpected.put("D", 0);
+	oneStudentExpected.put("F", 0);
+	    
+	HashMap<String, Integer> ans = oneStudent.countOccurencesLetterGrades();
+    	System.out.println(ans);
+    	assertTrue(ans.equals(oneStudentExpected));
+    }
+    
+    @Test
+    public void  oneGradeEach() throws Exception {
+	 Course sixStudent = createCourse("SER317");
+	 sixStudent.set_points("Hanna",100);
+	 sixStudent.set_points("Karla",80);
+	 sixStudent.set_points("Becca",65);
+	 sixStudent.set_points("Monte",50);
+	 sixStudent.set_points("Sheldon", 35);
+         
+         // this would be the expected result after the method countOccurencesLetterGrades is called
+	 HashMap<String, Integer> sixStudentExpected = new HashMap<String, Integer>(); 
+	 sixStudentExpected.put("A", 1);
+	 sixStudentExpected.put("B", 1);
+	 sixStudentExpected.put("C", 1);
+	 sixStudentExpected.put("D", 1);
+	 sixStudentExpected.put("F", 1);
          
          HashMap<String, Integer> ans = sixStudent.countOccurencesLetterGrades();
          System.out.println(ans);
          assertTrue(ans.equals(sixStudentExpected));
          
-	 	 sixStudent.set_points("Rob", -10);
+	 sixStudent.set_points("Rob", -10);
 	 	 
          ans = sixStudent.countOccurencesLetterGrades();
          System.out.println(ans);
